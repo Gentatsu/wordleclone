@@ -1,0 +1,24 @@
+.cell {
+    width: 15vmin;
+    height: 15vmin;
+    margin: 2vmin 2vmin 0 0;
+    background-color: #C5C6BE;
+    float: left;
+}
+/* add left margin to first childs of rows */
+.cell:nth-child(4n+1) {
+    margin-left: 2vmin;
+}
+
+.number {
+    position: absolute;
+    height: 15vmin;
+    width: 15vmin;
+    font-size: 5vmin;
+    font-weight: bold;
+    text-align: center;
+    line-height: 15vmin;
+    /* background-color: #F44336; */
+    color: #FFFFFF;
+    transition: all .3s;
+}
