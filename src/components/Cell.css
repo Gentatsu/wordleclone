@@ -1,6 +1,6 @@
 .cell {
-    width: 15vmin;
-    height: 15vmin;
+    width: 10vmin;
+    height: 10vmin;
     margin: 2vmin 2vmin 0 0;
     background-color: #C5C6BE;
     float: left;
@@ -12,12 +12,12 @@
 
 .number {
     position: absolute;
-    height: 15vmin;
-    width: 15vmin;
+    height: 10vmin;
+    width: 10vmin;
     font-size: 5vmin;
     font-weight: bold;
     text-align: center;
-    line-height: 15vmin;
+    line-height: 10vmin;
     /* background-color: #F44336; */
     color: #FFFFFF;
     transition: all .3s;
