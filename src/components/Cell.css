@@ -1,31 +1,26 @@
 .cell {
-    width: 10vmin;
-    height: 10vmin;
-    margin: 2vmin 2vmin 0 0;
+    width: 7vmin;
+    height: 7vmin;
+    margin: 1vmin 1vmin 0 0;
     background-color: #C5C6BE;
     float: left;
 }
-/* add left margin to first childs of rows */
-/* .cell:nth-child(4n+1) { */
-    /* margin-left: 2vmin; */
-/* } */
 
 .letter {
     position: absolute;
-    height: 10vmin;
-    width: 10vmin;
+    height: 7vmin;
+    width: 7vmin;
     font-size: 5vmin;
     font-weight: bold;
     text-align: center;
-    line-height: 10vmin;
-    /* background-color: #F44336; */
+    line-height: 7vmin;
     color: #FFFFFF;
     transition: all .3s;
 }
 
 .wrongplace {
-    background-color: #989b09;
+    background-color: #c2c45f;
 }
 .rightplace {
-    background-color: #099b35;
+    background-color: #35aa58;
 }

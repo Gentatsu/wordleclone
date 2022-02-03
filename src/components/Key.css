@@ -1,0 +1,36 @@
+.key {
+    width: 3vmin;
+    height: 6vmin;
+    margin: 0.5vmin 0.5vmin 0 0;
+    background-color: #C5C6BE;
+    float: left;
+}
+
+.keyletter {
+    position: absolute;
+    height: 6vmin;
+    width: 3vmin;
+    font-size: 2vmin;
+    font-weight: bold;
+    text-align: center;
+    line-height: 6vmin;
+    color: #FFFFFF;
+    transition: all .3s;
+}
+
+.keyboard {
+    display: block;
+    float: left;
+    margin-bottom: 2px;
+}
+
+.wrongplace_keyboard {
+    background-color: #989b09;
+}
+.rightplace_keyboard {
+    background-color: #099b35;
+}
+
+.wrongletter_keyboard {
+    background-color: #666666;
+}

@@ -2,16 +2,20 @@ import React, {Component} from "react"
 
 import './App.css';
 import {Word} from "./components/Word"
+import {Keyboard} from "./components/Keyboard"
+import update from 'immutability-helper';
 
 
  //the class you are making your component from
  class App extends Component {
   // constructor to set state and bind "this"
-
+  allowedAttempts = 6
   state = {
     word: [],
-    attempt: [Array(5).fill(-1)],
-    correctWord:  ["m", "o", "i", "s", "t"]
+    attempt: Array(this.allowedAttempts).fill(Array(5).fill(-1)),
+    wordAttempts: Array(this.allowedAttempts).fill(Array(5).fill("")),
+    correctWord:  "moist",
+    currentAttempt : 0
 }
   constructor(props) {
       super(props);
@@ -28,19 +32,29 @@ import {Word} from "./components/Word"
       }
       else if (event.keyCode === 8) 
       {
-        this.state.word.splice(-1)
-        this.setState(this.state)
+        var newWord = this.state.word
+        newWord.splice(-1)
+        this.setState({word: newWord})
       }
       else if (event.keyCode === 13)
       {
         if (this.state.word.length === 5)
         {
-          this.setState({
-            attempt: [this.state.word.map(function(letter) {
+          var attempt = this.state.word.map(function(letter) {
             return this.state.correctWord.indexOf(letter)
               }, this)
-            ]
-          })
+          const currentIndex = this.state.currentAttempt
+          if (this.state.word.join('') === this.state.correctWord)
+          {
+            document.removeEventListener("keydown", this.handleOnKeyPress, false);
+          }
+          this.setState((state) => {
+            return {
+              attempt: update(state.attempt, {[currentIndex]: {$set: attempt}}),
+              wordAttempts: update(state.wordAttempts, {[currentIndex]: {$set: state.word}}),
+              word: "",
+              currentAttempt: state.currentAttempt+1
+          }})
         }
       }
   }
@@ -54,16 +68,21 @@ import {Word} from "./components/Word"
   
   // the render() method to put stuff into the DOM
   render() {
-    
+    var words = []
+    var alphabet = <Keyboard 
+    word = "abcdefghijklmnopqrstuvwxyz" 
+    attempts = {this.state.wordAttempts} 
+    correctWord={this.state.correctWord}/>
+    for (let i = 0; i < this.allowedAttempts; i++) {
+      words.push(<Word number={5} 
+        word = {i===this.state.currentAttempt ? this.state.word: this.state.wordAttempts[i]} 
+        attempt={this.state.attempt[i]}/>);
+    }
     const page = 
      (
-        // wrapper div of component
         <div>
-          <Word number={5} word={this.state.word} attempt={this.state.attempt[0]}/>
-          <Word number={5} word=""/>
-          <Word number={5} word=""/>
-          <Word number={5} word=""/>
-          <Word number={5} word=""/>
+        {words}
+        {alphabet}
         </div>
     );
     return page
