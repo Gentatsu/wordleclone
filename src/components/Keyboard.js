@@ -13,7 +13,7 @@ export class Key extends React.Component {
 
   updateState(newState)
   {
-    if (this.state.keyState !== "unused")
+    if (this.state.keyState === "rightplace" || this.state.keyState === "wrongletter_keyboard")
       return;
     this.setState({keyState: newState});
   }

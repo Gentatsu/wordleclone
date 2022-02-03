@@ -39,6 +39,8 @@ import update from 'immutability-helper';
       }
       else if (event.keyCode === 13)
       {
+        if (this.state.currentAttempt === this.allowedAttempts)
+          this.removeKeyPressHandler()
         if (this.state.word.length === 5)
         {
           var attempt = this.state.word.map(function(letter) {
@@ -47,7 +49,7 @@ import update from 'immutability-helper';
           const currentIndex = this.state.currentAttempt
           if (this.state.word.join('') === this.state.correctWord)
           {
-            document.removeEventListener("keydown", this.handleOnKeyPress, false);
+            this.removeKeyPressHandler()
           }
           this.setState((state) => {
             return {
@@ -61,11 +63,16 @@ import update from 'immutability-helper';
       }
   }
 
+  removeKeyPressHandler()
+  {
+    document.removeEventListener("keydown", this.handleOnKeyPress, false);
+  }
+
   componentDidMount(){
     document.addEventListener("keydown", this.handleOnKeyPress, false);
   }
   componentWillUnmount(){
-    document.removeEventListener("keydown", this.handleOnKeyPress, false);
+    this.removeKeyPressHandler()
   }
   
   // the render() method to put stuff into the DOM
