@@ -10,7 +10,7 @@
     /* margin-left: 2vmin; */
 /* } */
 
-.number {
+.letter {
     position: absolute;
     height: 10vmin;
     width: 10vmin;
@@ -21,4 +21,11 @@
     /* background-color: #F44336; */
     color: #FFFFFF;
     transition: all .3s;
+}
+
+.wrongplace {
+    background-color: #989b09;
+}
+.rightplace {
+    background-color: #099b35;
 }
