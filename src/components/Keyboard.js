@@ -8,21 +8,15 @@ export class Key extends React.Component {
   
   constructor(props) {
     super(props);
-    this.changeState = this.changeState.bind(this)
-    this.getState = this.getState.bind(this)
     this.state = {keyState: "unused", letter: this.props.letter}
   }
 
-  changeState(newState)
+  updateState(newState)
   {
-      this.setState({keyState: newState})
+    if (this.state.keyState !== "unused")
+      return;
+    this.setState({keyState: newState});
   }
-
-  getState()
-  {
-      return this.state.keyState
-  }
-
 
   render() {
       const cellComponent = <div className="key" >
@@ -38,12 +32,20 @@ export class Key extends React.Component {
 
 export class Keyboard extends React.Component {
 
+
   constructor(props) {
     super(props);
     // this.state.word = props.word.map(function(letter) {
       // return {letter: letter, keyState: "unused"}
     // })
+    var rows = []
+    for (let letter of this.props.word) 
+    {
+      var cell = <Key letter={letter} ref={React.createRef()}/>
+      rows.push(cell);
+    }
     this.changeState = this.changeState.bind(this)
+    this.state = {rows: rows}
   }
 
   changeState(letter, newState)
@@ -54,34 +56,38 @@ export class Keyboard extends React.Component {
     // this.setState(state => (state.word. ))
   }
 
-  render() {
-      var rows = []
-      for (let i = 0; i < this.props.word.length; i++) 
-      {
-        var cell = <Key letter={this.props.word[i]}/>
-        rows.push(cell);
-      }
-      for (const attempt of this.props.attempts)
-      {
-        console.log(attempt)
-        var corrects = attempt.map(function(letter) {
-          return this.props.correctWord.indexOf(letter)
-        }, this);
-        console.log(corrects)
-        for (let i = 0; i < attempt.length; i++) 
-        { 
-          if (corrects[i] !== -1)
+  checkAttempt(attempts, correctWord)
+  {
+    for (const attempt of attempts)
+    {
+      var corrects = attempt.map(function(letter) {
+        return correctWord.indexOf(letter)
+      }, this);
+      // console.log(corrects)
+      for (let i = 0; i < attempt.length; i++) 
+      { 
+        var keyfunc = this.state.rows.find(key => key.props.letter === attempt[i]).ref.current;
+        console.log(keyfunc)
+        if (corrects[i] !== -1)
+        {
+          if (attempt[i] === this.props.correctWord[i])
           {
-            if (attempt[i] === this.props.correctWord[i])
-            {
-              var keydiv = rows.find(cell => cell.props.letter === attempt[i])
-              console.log(keydiv)
-              console.log(rows[0].getState())
-              // .changeState("rightPlace")
-            }
+            keyfunc.updateState("rightplace")
+          }
+          else 
+          {
+            keyfunc.updateState("wrongplace")
           }
         }
+        else
+        {
+          keyfunc.updateState("wrongletter_keyboard")
+        }
       }
-      return <div className="keyboard">{rows}</div>
+    }
+  }
+
+  render() {
+      return <div className="keyboard">{this.state.rows}</div>
   }
 }

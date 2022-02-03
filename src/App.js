@@ -10,6 +10,9 @@ import update from 'immutability-helper';
  class App extends Component {
   // constructor to set state and bind "this"
   allowedAttempts = 6
+  word = "abcdefghijklmnopqrstuvwxyz" 
+  inputRef = React.createRef();
+
   state = {
     word: [],
     attempt: Array(this.allowedAttempts).fill(Array(5).fill(-1)),
@@ -27,8 +30,6 @@ import update from 'immutability-helper';
       if (this.state.word.length < 5 && ((event.keyCode >= 65 && event.keyCode <= 90) || (event.keyCode >= 97 && event.keyCode <= 122)))
       {
         this.setState({word: [...this.state.word, event.key]})
-        // var currentWord = document.getElementById("currentWord")
-        // currentWord.setState({word: this.word})
       }
       else if (event.keyCode === 8) 
       {
@@ -55,6 +56,7 @@ import update from 'immutability-helper';
               word: "",
               currentAttempt: state.currentAttempt+1
           }})
+          this.inputRef.current.checkAttempt(this.state.wordAttempts, this.state.correctWord)
         }
       }
   }
@@ -70,9 +72,10 @@ import update from 'immutability-helper';
   render() {
     var words = []
     var alphabet = <Keyboard 
-    word = "abcdefghijklmnopqrstuvwxyz" 
+    word = {this.word}
     attempts = {this.state.wordAttempts} 
-    correctWord={this.state.correctWord}/>
+    correctWord={this.state.correctWord}
+    ref={this.inputRef}/>
     for (let i = 0; i < this.allowedAttempts; i++) {
       words.push(<Word number={5} 
         word = {i===this.state.currentAttempt ? this.state.word: this.state.wordAttempts[i]} 
