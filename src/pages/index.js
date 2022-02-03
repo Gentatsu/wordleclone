@@ -5,20 +5,47 @@ import { StaticImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import {Word} from "../components/gridCell"
+import ReactDOM from 'react-dom'
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    {/* <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["auto", "webp", "avif"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    /> */}
-    <Word number={5}/>
-  </Layout>
-)
+
+ //the class you are making your component from
+ class IndexPage extends React.Component {
+  // constructor to set state and bind "this"
+  constructor(props) {
+      super(props);
+      this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
+      this.word = []
+    }
+
+  // function to handle the click
+   handleOnKeyPress(event) {
+      this.word.push(event.key)
+      console.log(event);
+  }
+
+  componentDidMount(){
+    document.addEventListener("keydown", this.handleOnKeyPress, false);
+  }
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.handleOnKeyPress, false);
+  }
+  
+  // the render() method to put stuff into the DOM
+  render() {
+    
+    const page = 
+    // the return() to put your default HTML into the DOM
+     (
+        // wrapper div of component
+      <Layout>
+        <Seo title="Home" />
+        <Word class="currentWord" number={5} letter={this.word}/>
+        <Word number={7}/>
+      </Layout>
+    );
+    return page
+  }
+}
+
 
 export default IndexPage

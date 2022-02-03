@@ -6,9 +6,9 @@
     float: left;
 }
 /* add left margin to first childs of rows */
-.cell:nth-child(4n+1) {
-    margin-left: 2vmin;
-}
+/* .cell:nth-child(4n+1) { */
+    /* margin-left: 2vmin; */
+/* } */
 
 .number {
     position: absolute;
