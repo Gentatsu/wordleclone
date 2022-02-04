@@ -3,6 +3,12 @@ import "./Word.css"
 import "./Cell.css"
 import Cell, {unused, rightplace, wrongplace} from "./Cell"
 
+function* enumerate (it, start = 0)
+{ let i = start
+  for (const x of it)
+    yield [i++, x]
+}
+
 export class Word extends React.Component {
 
   currentIndex = 0
@@ -32,34 +38,13 @@ export class Word extends React.Component {
 
     enter(attempt, correctWord)
     {
-      // var places = {}
-      // var placeIndices = {}
-      // var attemptIndices = attempt.map(function(letter) {
-      //   return correctWord.indexOf(letter)
-      //     }, this)
-      // for (let i=0; i < attempt.length; i++)
-      // {
-      //   var currentStyle = unused
-      //   if (attemptIndices[i] === -1)
-      //     continue;
-      //   var currentCell = this.state.rows[i].ref.current
-      //   if (attempt[i] === correctWord[i])
-      //   {
-      //     places[attempt[i]] = currentStyle = rightplace
-      //   }
-      //   else
-      //     if (!(attempt[i] in places))
-      //       places[attempt[i]] = currentStyle = wrongplace
-      //   currentCell.updateState(currentStyle) 
-      //   // currentCell.updateState(attempt[i] === correctWord[i] ? rightplace: wrongplace) 
-      // }
-      // console.log(places)
-      for (let letter of correctWord)
+      for (const [index, letter] of enumerate(correctWord))
       {
-        let index = attempt.indexOf(letter)
-        if (index === -1)
+        let attemptIndex = attempt.indexOf(letter)
+        if (attemptIndex === -1)
           continue
-        this.state.rows[index].ref.current.updateState(correctWord[index] === letter ? rightplace: wrongplace)
+        this.state.rows[letter === attempt[index] ? index: attemptIndex].ref.current.updateState
+        (correctWord[attemptIndex] === letter ? rightplace: wrongplace)
       }
     }
 
