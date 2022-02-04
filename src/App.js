@@ -66,6 +66,7 @@ import update from 'immutability-helper';
     if (this.state.word.join('') === this.state.correctWord || this.state.currentAttempt+1 === this.allowedAttempts)
       this.removeKeyPressHandler()
     this.wordRef.current.enter(this.state.word, this.state.correctWord)
+    this.keyboardRef.current.checkAttempt(this.state.word, this.state.correctWord)
     const currentIndex = this.state.currentAttempt
     this.setState((state) => {
       return {
@@ -73,8 +74,7 @@ import update from 'immutability-helper';
         word: "",
         currentAttempt: state.currentAttempt+1
     }})
-    this.wordRef = this.state.words[this.state.currentAttempt].ref
-    this.keyboardRef.current.checkAttempt(this.state.wordAttempts, this.state.correctWord)
+    this.wordRef = this.state.currentAttempt < this.allowedAttempts ? this.state.words[this.state.currentAttempt].ref : undefined
   }
 
   removeKeyPressHandler()
@@ -95,7 +95,7 @@ import update from 'immutability-helper';
     
     const page = 
      (
-        <div class="centered">
+        <div className ="centered">
         {this.state.words}
         {this.keyboard}
         </div>

@@ -16,21 +16,16 @@ export class Keyboard extends React.Component {
     this.state = {rows: rows}
   }
 
-  checkAttempt(attempts, correctWord)
+  checkAttempt(attempt, correctWord)
   {
-    for (const attempt of attempts)
-    {
-      var corrects = attempt.map(function(letter) {
-        return correctWord.indexOf(letter)
-      }, this);
-      for (let i = 0; i < attempt.length; i++) 
-      { 
-        var keyfunc = this.state.rows.find(key => key.props.letter === attempt[i]).ref.current;
-        if (corrects[i] !== -1)
-          keyfunc.updateState(attempt[i] === correctWord[i] ? rightplace: wrongplace)
-        else
-          keyfunc.updateState(wrongletter_keyboard)
-      }
+    var corrects = attempt.map(letter => (correctWord.indexOf(letter)), this);
+    for (let i = 0; i < attempt.length; i++) 
+    { 
+      var keyfunc = this.state.rows.find(key => key.props.letter === attempt[i]).ref.current;
+      if (corrects[i] !== -1)
+        keyfunc.updateState(attempt[i] === correctWord[i] ? rightplace: wrongplace)
+      else
+        keyfunc.updateState(wrongletter_keyboard)
     }
   }
 
