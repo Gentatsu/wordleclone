@@ -1,45 +1,13 @@
 {
-  "name": "wordclone",
+  "name": "wordle_api",
   "version": "1.0.0",
-  "private": true,
+  "main": "server.js",
+  "license": "MIT",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "classnames": "^2.3.1",
-    "express": "^4.17.2",
-    "immutability-helper": "^3.1.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
+    "express": "^4.15.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "heroku-postbuild": "npm install && npm run build && cd server && node server.js"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "http://localhost:8080"
-
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  }
 }
