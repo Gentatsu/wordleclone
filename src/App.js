@@ -3,7 +3,6 @@ import React, {Component} from "react"
 import './App.css';
 import {Word} from "./components/Word"
 import {Keyboard} from "./components/Keyboard"
-import update from 'immutability-helper';
 
 
  //the class you are making your component from
@@ -12,8 +11,7 @@ import update from 'immutability-helper';
   allowedAttempts = 6
   wordLength = 5
   alphabet = "abcdefghijklmnopqrstuvwxyz" 
-  keyboardRef = React.createRef();
-  keyboard = <Keyboard alphabet = {this.alphabet} ref={this.keyboardRef}/>
+  keyboard = <Keyboard alphabet = {this.alphabet} ref={React.createRef()}/>
   wordRef = undefined
   
   constructor(props) {
@@ -25,26 +23,29 @@ import update from 'immutability-helper';
     }
     this.state = {
       word: [],
-      wordAttempts: Array(this.allowedAttempts).fill(Array(this.wordLength).fill("")),
-      correctWord:  "moist",
+      correctWord:  "",
       currentAttempt : 0,
       words: words
     }    
     this.wordRef = words[0].ref 
   }
 
+
   // function to handle the click
    handleOnKeyPress(event) {
+     // letter a-z, A-z
       if (this.state.word.length < this.wordLength && (event.keyCode >= 65 && event.keyCode <= 90))
       {
         var letter = event.key.toLowerCase()
         this.setState({word: [...this.state.word, letter]})
         this.wordRef.current.add(letter)
       }
+      // backspace
       else if (event.keyCode === 8 && this.state.word.length > 0) 
       {
         this.deleteLastLetter()
       }
+      // enter
       else if (event.keyCode === 13)
       {
         this.checkEnter()
@@ -66,11 +67,9 @@ import update from 'immutability-helper';
     if (this.state.word.join('') === this.state.correctWord || this.state.currentAttempt+1 === this.allowedAttempts)
       this.removeKeyPressHandler()
     this.wordRef.current.enter(this.state.word, this.state.correctWord)
-    this.keyboardRef.current.checkAttempt(this.state.word, this.state.correctWord)
-    const currentIndex = this.state.currentAttempt
+    this.keyboard.ref.current.checkAttempt(this.state.word, this.state.correctWord)
     this.setState((state) => {
       return {
-        wordAttempts: update(state.wordAttempts, {[currentIndex]: {$set: state.word}}),
         word: "",
         currentAttempt: state.currentAttempt+1
     }})
@@ -82,8 +81,21 @@ import update from 'immutability-helper';
     document.removeEventListener("keydown", this.handleOnKeyPress, false);
   }
 
+  getWord = async () => {
+    const response = await fetch('/word');
+    const body = await response.text();
+
+    if (response.status !== 200) {
+      throw Error(body.message) 
+    }
+    return body;
+  };
+
   componentDidMount(){
     document.addEventListener("keydown", this.handleOnKeyPress, false);
+    this.getWord()
+      .then(res => this.setState({ correctWord: res }))
+      .catch(err => console.log(err));
   }
 
   componentWillUnmount(){
@@ -104,5 +116,5 @@ import update from 'immutability-helper';
   }
 }
 
-
 export default App;
+
