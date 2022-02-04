@@ -2,10 +2,10 @@ import React  from "react"
 import "./Cell.css"
 import classNames from "classnames";
 
-const unused = "unused"
-const rightplace = "rightplace"
-const wrongplace = "wrongplace"
-const wrongletter_keyboard = "wrongletter_keyboard"
+export const unused = "unused"
+export const rightplace = "rightplace"
+export const wrongplace = "wrongplace"
+export const wrongletter_keyboard = "wrongletter_keyboard"
 
 export default class Cell extends React.Component {
   
@@ -16,7 +16,7 @@ export default class Cell extends React.Component {
 
   updateState(newState)
   {
-    if (this.state.keyState === "rightplace" || this.state.keyState === "wrongletter_keyboard")
+    if (this.state.keyState === rightplace || this.state.keyState === wrongletter_keyboard)
       return;
     this.setState({keyState: newState});
   }

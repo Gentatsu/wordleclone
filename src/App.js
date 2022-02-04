@@ -73,7 +73,7 @@ import update from 'immutability-helper';
         word: "",
         currentAttempt: state.currentAttempt+1
     }})
-    this.wordRef = this.state.words[this.state.currentAttempt]
+    this.wordRef = this.state.words[this.state.currentAttempt].ref
     this.keyboardRef.current.checkAttempt(this.state.wordAttempts, this.state.correctWord)
   }
 

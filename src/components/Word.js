@@ -1,7 +1,7 @@
 import React from "react"
 import "./Word.css"
 import "./Cell.css"
-import Cell from "./Cell"
+import Cell, {unused, rightplace, wrongplace} from "./Cell"
 
 export class Word extends React.Component {
 
@@ -32,15 +32,34 @@ export class Word extends React.Component {
 
     enter(attempt, correctWord)
     {
-      var attemptIndices = attempt.map(function(letter) {
-        return correctWord.indexOf(letter)
-          }, this)
-      for (let i=0; i < attempt.length; i++)
+      // var places = {}
+      // var placeIndices = {}
+      // var attemptIndices = attempt.map(function(letter) {
+      //   return correctWord.indexOf(letter)
+      //     }, this)
+      // for (let i=0; i < attempt.length; i++)
+      // {
+      //   var currentStyle = unused
+      //   if (attemptIndices[i] === -1)
+      //     continue;
+      //   var currentCell = this.state.rows[i].ref.current
+      //   if (attempt[i] === correctWord[i])
+      //   {
+      //     places[attempt[i]] = currentStyle = rightplace
+      //   }
+      //   else
+      //     if (!(attempt[i] in places))
+      //       places[attempt[i]] = currentStyle = wrongplace
+      //   currentCell.updateState(currentStyle) 
+      //   // currentCell.updateState(attempt[i] === correctWord[i] ? rightplace: wrongplace) 
+      // }
+      // console.log(places)
+      for (let letter of correctWord)
       {
-        if (attemptIndices[i] === -1)
-          continue;
-        var currentCell = this.state.rows[i].ref.current
-        currentCell.updateState(attempt[i] === correctWord[i] ? "rightplace": "wrongplace") 
+        let index = attempt.indexOf(letter)
+        if (index === -1)
+          continue
+        this.state.rows[index].ref.current.updateState(correctWord[index] === letter ? rightplace: wrongplace)
       }
     }
 
