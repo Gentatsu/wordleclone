@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.72e9ecda.css",
-    "main.js": "/static/js/main.9ab6e1ca.js",
-    "static/js/787.e33c7698.chunk.js": "/static/js/787.e33c7698.chunk.js",
-    "index.html": "/index.html",
-    "main.72e9ecda.css.map": "/static/css/main.72e9ecda.css.map",
-    "main.9ab6e1ca.js.map": "/static/js/main.9ab6e1ca.js.map",
-    "787.e33c7698.chunk.js.map": "/static/js/787.e33c7698.chunk.js.map"
+    "main.css": "/wordleclone/static/css/main.c2c26538.css",
+    "main.js": "/wordleclone/static/js/main.4d867510.js",
+    "static/js/787.da9b6d99.chunk.js": "/wordleclone/static/js/787.da9b6d99.chunk.js",
+    "index.html": "/wordleclone/index.html",
+    "main.c2c26538.css.map": "/wordleclone/static/css/main.c2c26538.css.map",
+    "main.4d867510.js.map": "/wordleclone/static/js/main.4d867510.js.map",
+    "787.da9b6d99.chunk.js.map": "/wordleclone/static/js/787.da9b6d99.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.72e9ecda.css",
-    "static/js/main.9ab6e1ca.js"
+    "static/css/main.c2c26538.css",
+    "static/js/main.4d867510.js"
   ]
 }
