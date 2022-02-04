@@ -43,8 +43,8 @@ export class Word extends React.Component {
         let attemptIndex = attempt.indexOf(letter)
         if (attemptIndex === -1)
           continue
-        this.state.rows[letter === attempt[index] ? index: attemptIndex].ref.current.updateState
-        (correctWord[attemptIndex] === letter ? rightplace: wrongplace)
+        let correct = letter === attempt[index]
+        this.state.rows[correct ? index: attemptIndex].ref.current.updateState(correct ? rightplace: wrongplace)
       }
     }
 
