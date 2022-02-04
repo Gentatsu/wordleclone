@@ -1,30 +1,50 @@
-import React, { useState, useEffect }  from "react"
+import React from "react"
+import "./Word.css"
+import "./Cell.css"
 import Cell from "./Cell"
-import word from "./Word.css"
-
-// export function updateState(text){
-    // this.setState({word: text})
-    // console.log(this.state)
-// }
 
 export class Word extends React.Component {
 
+  currentIndex = 0
+
+  constructor(props) {
+    super(props);
+    var rows = []
+    for (let i=0; i < this.props.number; i++) 
+    {
+      var cell = <Cell cellStyle="cell" keyStyle="letter" letter="" ref={React.createRef()}/>
+      rows.push(cell);
+    }
+    this.state = {rows: rows}
+  }
+
+    add(letter)
+    {
+      this.state.rows[this.currentIndex].ref.current.updateLetter(letter)
+      this.currentIndex += 1
+    }
+
+    deleteLastLetter()
+    {
+      this.currentIndex -= 1
+      this.state.rows[this.currentIndex].ref.current.updateLetter("")
+    }
+
+    enter(attempt, correctWord)
+    {
+      var attemptIndices = attempt.map(function(letter) {
+        return correctWord.indexOf(letter)
+          }, this)
+      for (let i=0; i < attempt.length; i++)
+      {
+        if (attemptIndices[i] === -1)
+          continue;
+        var currentCell = this.state.rows[i].ref.current
+        currentCell.updateState(attempt[i] === correctWord[i] ? "rightplace": "wrongplace") 
+      }
+    }
 
     render() {
-        var rows = []
-        var attempt = this.props.attempt !== undefined 
-        for (let i = 0; i < this.props.number; i++) 
-        {
-          var wrongplace = false
-          var rightplace = false
-          if (attempt)
-          {
-            wrongplace = this.props.attempt[i] !== -1 
-            rightplace = this.props.attempt[i] === i 
-          }
-          var cell = <Cell letter={this.props.word[i]} wrongplace={wrongplace} rightplace={rightplace}/>
-          rows.push(cell);
-        }
-        return <div className="word">{rows}</div>
+        return <div className="word">{this.state.rows}</div>
     }
   }

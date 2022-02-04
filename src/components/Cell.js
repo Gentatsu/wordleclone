@@ -1,18 +1,40 @@
-import React, { useState, useEffect }  from "react"
-import {cell, number, wrongplace, rightplace} from "./Cell.css"
+import React  from "react"
+import "./Cell.css"
 import classNames from "classnames";
 
+const unused = "unused"
+const rightplace = "rightplace"
+const wrongplace = "wrongplace"
+const wrongletter_keyboard = "wrongletter_keyboard"
 
 export default class Cell extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {keyState: unused, letter: this.props.letter}
+  }
+
+  updateState(newState)
+  {
+    if (this.state.keyState === "rightplace" || this.state.keyState === "wrongletter_keyboard")
+      return;
+    this.setState({keyState: newState});
+  }
+
+  updateLetter(newLetter)
+  {
+    this.setState({letter: newLetter});
+  }
 
   render() {
-    const cellComponent = <div className="cell" >
-    <div className={classNames({
-      letter: true,
-      wrongplace: this.props.wrongplace,
-      rightplace: this.props.rightplace,
-    })}>
-      {this.props.letter}</div>
+    const cellComponent = 
+    <div className={this.props.cellStyle} >
+      <div className={classNames({
+        [this.props.keyStyle]: true,
+        [this.state.keyState]: true
+        })}>
+        {this.state.letter}
+      </div>
     </div>
     return cellComponent
   }
