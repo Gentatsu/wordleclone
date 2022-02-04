@@ -4,13 +4,13 @@ import Cell, {unused, rightplace, wrongplace, wrongletter_keyboard} from "./Cell
 
 export class Keyboard extends React.Component {
 
-
   constructor(props) {
     super(props);
     var rows = []
     for (let letter of this.props.alphabet) 
     {
-      var cell = <Cell cellStyle="key" keyStyle="keyletter" letter={letter} ref={React.createRef()}/>
+      const addLetter = () => this.props.add(letter)
+      var cell = <Cell cellStyle="key" onClick={addLetter} keyStyle="keyletter" letter={letter} ref={React.createRef()}/>
       rows.push(cell);
     }
     this.state = {rows: rows}
@@ -30,6 +30,10 @@ export class Keyboard extends React.Component {
   }
 
   render() {
-      return <div className="keyboard">{this.state.rows}</div>
+      return <div className="keyboard">
+        {this.state.rows}
+        <Cell cellStyle="key centered bigkey" onClick={this.props.delete} keyStyle="keyletter" letter={"<-"}/>
+        <Cell cellStyle="key centered bigkey" onClick={this.props.enter} keyStyle="keyletter" letter={"Enter"}/>
+        </div>
   }
 }

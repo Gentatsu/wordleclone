@@ -28,7 +28,7 @@ export default class Cell extends React.Component {
 
   render() {
     const cellComponent = 
-    <div className={this.props.cellStyle} >
+    <div onClick={this.props.onClick} className={this.props.cellStyle} >
       <div className={classNames({
         [this.props.keyStyle]: true,
         [this.state.keyState]: true

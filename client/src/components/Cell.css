@@ -24,3 +24,7 @@
 .rightplace {
     background-color: #5da874;
 }
+
+.bigkey {
+    width: 22.25vmin !important;
+}

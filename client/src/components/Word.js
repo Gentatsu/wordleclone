@@ -16,6 +16,9 @@ export class Word extends React.Component {
   constructor(props) {
     super(props);
     var rows = []
+    this.add = this.add.bind(this);
+    this.deleteLastLetter = this.deleteLastLetter.bind(this);
+    this.enter = this.enter.bind(this);
     for (let i=0; i < this.props.number; i++) 
     {
       var cell = <Cell cellStyle="cell" keyStyle="letter" letter="" ref={React.createRef()}/>

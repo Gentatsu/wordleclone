@@ -10,38 +10,43 @@ import {Keyboard} from "./components/Keyboard"
   // constructor to set state and bind "this"
   allowedAttempts = 6
   wordLength = 5
-  alphabet = "abcdefghijklmnopqrstuvwxyz" 
-  keyboard = <Keyboard alphabet = {this.alphabet} ref={React.createRef()}/>
-  wordRef = undefined
+  alphabet = "qwertyuiopasdfghjklzxcvbnm" 
+  // wordRef = undefined
   
   constructor(props) {
     super(props);
     this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
+    this.addLetter = this.addLetter.bind(this);
+    this.deleteLastLetter = this.deleteLastLetter.bind(this);
+    this.checkEnter = this.checkEnter.bind(this);
     var words = []
     for (let i = 0; i < this.allowedAttempts; i++) {
       words.push(<Word number={this.wordLength} ref={React.createRef()}/>)
     }
+    var keyboard = <Keyboard alphabet = {this.alphabet} ref={React.createRef()} 
+    add={this.addLetter} delete={this.deleteLastLetter} enter={this.checkEnter}/>
     this.state = {
       word: [],
       correctWord:  "",
       currentAttempt : 0,
-      words: words
+      words: words,
+      keyboard: keyboard
     }    
-    this.wordRef = words[0].ref 
+    // this.wordRef = words[0].ref 
   }
 
 
   // function to handle the click
    handleOnKeyPress(event) {
      // letter a-z, A-z
-      if (this.state.word.length < this.wordLength && (event.keyCode >= 65 && event.keyCode <= 90))
+      if ((event.keyCode >= 65 && event.keyCode <= 90))
       {
         var letter = event.key.toLowerCase()
-        this.setState({word: [...this.state.word, letter]})
-        this.wordRef.current.add(letter)
+        this.addLetter(letter)
+        
       }
       // backspace
-      else if (event.keyCode === 8 && this.state.word.length > 0) 
+      else if (event.keyCode === 8) 
       {
         this.deleteLastLetter()
       }
@@ -52,12 +57,22 @@ import {Keyboard} from "./components/Keyboard"
       }
   }
 
+  addLetter(letter)
+  {
+    if (this.state.word.length >= this.wordLength)
+      return
+    this.setState({word: [...this.state.word, letter]})
+    this.state.words[this.state.currentAttempt].ref.current.add(letter)
+  }
+
   deleteLastLetter()
   {
+    if (this.state.word.length <= 0)
+      return
     var newWord = this.state.word
     newWord.splice(-1)
     this.setState({word: newWord})
-    this.wordRef.current.deleteLastLetter()
+    this.state.words[this.state.currentAttempt].ref.current.deleteLastLetter()
   }
 
   checkEnter()
@@ -66,14 +81,14 @@ import {Keyboard} from "./components/Keyboard"
       return
     if (this.state.word.join('') === this.state.correctWord || this.state.currentAttempt+1 === this.allowedAttempts)
       this.removeKeyPressHandler()
-    this.wordRef.current.enter(this.state.word, this.state.correctWord)
-    this.keyboard.ref.current.checkAttempt(this.state.word, this.state.correctWord)
+    this.state.words[this.state.currentAttempt].ref.current.enter(this.state.word, this.state.correctWord)
+    this.state.keyboard.ref.current.checkAttempt(this.state.word, this.state.correctWord)
     this.setState((state) => {
       return {
         word: "",
         currentAttempt: state.currentAttempt+1
     }})
-    this.wordRef = this.state.currentAttempt < this.allowedAttempts ? this.state.words[this.state.currentAttempt].ref : undefined
+    // this.wordRef = this.state.currentAttempt < this.allowedAttempts ? this.state.words[this.state.currentAttempt].ref : undefined
   }
 
   removeKeyPressHandler()
@@ -109,7 +124,7 @@ import {Keyboard} from "./components/Keyboard"
      (
         <div className ="centered">
         {this.state.words}
-        {this.keyboard}
+        {this.state.keyboard}
         </div>
     );
     return page
