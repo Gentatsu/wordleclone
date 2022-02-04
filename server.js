@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const fs = require('fs')
 const path = require('path');
-const favicon = require('express-favicon');
 
 const wordpath = path.join(__dirname, "words", 'words_5_2.txt');
 const port = process.env.PORT || 5000;
@@ -26,8 +25,6 @@ loadWords().then(words =>
 {
     app.use(express.static(path.join(__dirname, 'client/build')));
     app.get('/word', (req, res) => res.send(getRandomWord(words)))
-    app.use(favicon(__dirname + '/build/favicon.ico'));
-    // app.get('/public', (req, res) => {res.sendFile(path.join(__dirname+'/public/'));})
     // The "catchall" handler: for any request that doesn't
     // match one above, send back React's index.html file.
     app.get('*', (req, res) => {

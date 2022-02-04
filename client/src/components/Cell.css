@@ -1,6 +1,6 @@
 .cell {
-    width: 7vmin;
-    height: 7vmin;
+    width: 8vmin;
+    height: 8vmin;
     margin: 1vmin 1vmin 0 0;
     background-color: #C5C6BE;
     float: left;
@@ -8,9 +8,9 @@
 
 .letter {
     position: absolute;
-    height: 7vmin;
-    width: 7vmin;
-    font-size: 5vmin;
+    height: 8vmin;
+    width: 8vmin;
+    font-size: 6vmin;
     font-weight: bold;
     text-align: center;
     line-height: 7vmin;
@@ -25,6 +25,3 @@
     background-color: #5da874;
 }
 
-.bigkey {
-    width: 22.25vmin !important;
-}
