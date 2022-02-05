@@ -24,6 +24,7 @@ function getRandomWord(words)
 loadWords().then(words => 
 {
     app.use(express.static(path.join(__dirname, 'client/build')));
+    app.get('/.well-known/acme-challenge/7KNXj14XoaI2AtyU7Rfy2DkpmtQZD3GQw3J8ryBENKE', (req, res) => res.send("7KNXj14XoaI2AtyU7Rfy2DkpmtQZD3GQw3J8ryBENKE.VAbHNyRq_3jCJX9GpApJGH4r7AsTiHus4o4GqQTx0dI"))
     app.get('/word', (req, res) => res.send(getRandomWord(words)))
     // The "catchall" handler: for any request that doesn't
     // match one above, send back React's index.html file.
