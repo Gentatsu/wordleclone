@@ -11,7 +11,7 @@ import {Keyboard} from "./components/Keyboard"
   allowedAttempts = 6
   wordLength = 5
   alphabet = "qwertyuiopasdfghjklzxcvbnm" 
-  // wordRef = undefined
+  done = false
   
   constructor(props) {
     super(props);
@@ -32,7 +32,6 @@ import {Keyboard} from "./components/Keyboard"
       words: words,
       keyboard: keyboard
     }    
-    // this.wordRef = words[0].ref 
   }
 
 
@@ -59,7 +58,7 @@ import {Keyboard} from "./components/Keyboard"
 
   addLetter(letter)
   {
-    if (this.state.word.length >= this.wordLength)
+    if (this.state.word.length >= this.wordLength || this.done)
       return
     this.setState({word: [...this.state.word, letter]})
     this.state.words[this.state.currentAttempt].ref.current.add(letter)
@@ -67,7 +66,7 @@ import {Keyboard} from "./components/Keyboard"
 
   deleteLastLetter()
   {
-    if (this.state.word.length <= 0)
+    if (this.state.word.length <= 0 || this.done)
       return
     var newWord = this.state.word
     newWord.splice(-1)
@@ -77,7 +76,7 @@ import {Keyboard} from "./components/Keyboard"
 
   checkEnter()
   {
-    if (this.state.word.length !== this.wordLength)
+    if (this.state.word.length !== this.wordLength || this.done)
       return
     if (this.state.word.join('') === this.state.correctWord || this.state.currentAttempt+1 === this.allowedAttempts)
       this.removeKeyPressHandler()
@@ -94,6 +93,7 @@ import {Keyboard} from "./components/Keyboard"
   removeKeyPressHandler()
   {
     document.removeEventListener("keydown", this.handleOnKeyPress, false);
+    this.done = true
   }
 
   getWord = async () => {

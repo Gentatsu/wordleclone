@@ -32,8 +32,8 @@ export class Keyboard extends React.Component {
   render() {
       return <div className="keyboard">
         {this.state.rows}
-        <Cell cellStyle="key centered bigkey" onClick={this.props.delete} keyStyle="keyletter" letter={"<-"}/>
         <Cell cellStyle="key centered bigkey" onClick={this.props.enter} keyStyle="keyletter" letter={"Enter"}/>
+        <Cell cellStyle="key centered bigkey" onClick={this.props.delete} keyStyle="keyletter" letter={"<-"}/>
         </div>
   }
 }
