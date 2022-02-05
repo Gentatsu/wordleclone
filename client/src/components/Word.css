@@ -1,5 +1,5 @@
 .word {
     display: block;
     float: left;
-    margin-bottom: 2px;
+    margin-bottom: 0.15em;
 }

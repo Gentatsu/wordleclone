@@ -1,28 +1,30 @@
 .key {
-    width: 4.5vmin;
-    height: 8vmin;
-    margin: 0.5vmin 0.5vmin 0 0;
+    width: 2.2em;
+    height: 4em;
+    margin: 0.2em 0.2em 0 0;
     background-color: #C5C6BE;
     float: left;
 }
 
 .keyletter {
-    position: absolute;
-    width: 4.5vmin;
-    height: 8vmin;
-    font-size: 2.5vmin;
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
     font-weight: bold;
     text-align: center;
-    line-height: 6vmin;
     color: #FFFFFF;
     transition: all .3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .keyboard {
+    width: 39%;
     display: flex;
     float: left;
-    margin-bottom: 2px;
-    margin-top: 10px;
+    margin-bottom: 0.1em;
+    margin-top: 0.5em;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -32,5 +34,5 @@
 }
 
 .bigkey {
-    width: 22.25vmin !important;
+    width: 45% !important;
 }

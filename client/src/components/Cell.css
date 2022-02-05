@@ -1,19 +1,17 @@
 .cell {
-    width: 8vmin;
-    height: 8vmin;
-    margin: 1vmin 1vmin 0 0;
+    width: 4em;
+    height: 4em;
+    margin: 0.3em 0.3em 0 0;
     background-color: #C5C6BE;
     float: left;
 }
 
 .letter {
-    position: absolute;
-    height: 8vmin;
-    width: 8vmin;
-    font-size: 6vmin;
+    height: 100%;
+    width: 100%;
+    font-size: 3em;
     font-weight: bold;
     text-align: center;
-    line-height: 7vmin;
     color: #FFFFFF;
     transition: all .3s;
 }
