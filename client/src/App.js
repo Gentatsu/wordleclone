@@ -3,7 +3,9 @@ import React, {Component} from "react"
 import './App.css';
 import {Word} from "./components/Word"
 import {Keyboard} from "./components/Keyboard"
-
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-48542571-2');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
  //the class you are making your component from
  class App extends Component {
