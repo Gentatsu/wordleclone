@@ -16,10 +16,10 @@ export default class Cell extends React.Component {
 
   updateState(newState)
   {
-    if (this.state.keyState === rightplace || this.state.keyState === wrongletter_keyboard)
-      return;
-    this.setState({keyState: newState});
-  }
+    this.setState(function(state, props) {
+      return (state.keyState === rightplace || state.keyState === wrongletter_keyboard) ? {} : {keyState: newState};
+    });
+  } 
 
   updateLetter(newLetter)
   {

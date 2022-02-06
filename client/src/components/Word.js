@@ -1,7 +1,7 @@
 import React from "react"
 import "./Word.css"
 import "./Cell.css"
-import Cell, {unused, rightplace, wrongplace} from "./Cell"
+import Cell, {rightplace, wrongplace} from "./Cell"
 
 function* enumerate (it, start = 0)
 { let i = start
