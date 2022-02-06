@@ -3,6 +3,7 @@ import React, {Component} from "react"
 import './App.css';
 import {Word} from "./components/Word"
 import {Keyboard} from "./components/Keyboard"
+import toast, { Toaster } from 'react-hot-toast';
 import ReactGA from 'react-ga';
 ReactGA.initialize('UA-48542571-2');
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -81,7 +82,9 @@ ReactGA.pageview(window.location.pathname + window.location.search);
     if (this.state.word.length !== this.wordLength || this.done)
       return
     if (this.state.word.join('') === this.state.correctWord || this.state.currentAttempt+1 === this.allowedAttempts)
+    {
       this.removeKeyPressHandler()
+    }
     this.state.words[this.state.currentAttempt].ref.current.enter(this.state.word, this.state.correctWord)
     this.state.keyboard.ref.current.checkAttempt(this.state.word, this.state.correctWord)
     this.setState((state) => {
@@ -89,13 +92,14 @@ ReactGA.pageview(window.location.pathname + window.location.search);
         word: "",
         currentAttempt: state.currentAttempt+1
     }})
-    // this.wordRef = this.state.currentAttempt < this.allowedAttempts ? this.state.words[this.state.currentAttempt].ref : undefined
   }
 
   removeKeyPressHandler()
   {
     document.removeEventListener("keydown", this.handleOnKeyPress, false);
     this.done = true
+    toast(`Word was ${this.state.correctWord}`, {duration: "200"})
+    
   }
 
   getWord = async () => {
@@ -105,7 +109,7 @@ ReactGA.pageview(window.location.pathname + window.location.search);
     if (response.status !== 200) {
       throw Error(body.message) 
     }
-    return body;
+    return body.trim();
   };
 
   componentDidMount(){
@@ -125,6 +129,7 @@ ReactGA.pageview(window.location.pathname + window.location.search);
     const page = 
      (
         <div className ="centered">
+        <div><Toaster/></div>
         {this.state.words}
         {this.state.keyboard}
         </div>
