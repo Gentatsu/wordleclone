@@ -103,6 +103,7 @@ ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   getWord = async () => {
+    // const response = await fetch('https://wordlyclone.herokuapp.com/word');
     const response = await fetch('/word');
     const body = await response.text();
 
