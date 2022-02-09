@@ -84,9 +84,15 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 
   checkEnter()
   {
+    var word = this.state.word.join('')
+    if (!this.isValidWord(word))
+    {
+      toast.error("Invalid wordo", {duration: "100"})
+      return
+    }
     if (this.state.word.length !== this.wordLength || this.done)
       return
-    if (this.state.word.join('') === this.state.correctWord || this.state.currentAttempt+1 === this.allowedAttempts)
+    if (word === this.state.correctWord || this.state.currentAttempt+1 === this.allowedAttempts)
     {
       this.removeKeyPressHandler()
     }
@@ -103,12 +109,11 @@ ReactGA.pageview(window.location.pathname + window.location.search);
   {
     document.removeEventListener("keydown", this.handleOnKeyPress, false);
     this.done = true
-    toast(`Word was ${this.state.correctWord}`, {duration: "200"})
+    toast(`Word was ${this.state.correctWord}`, {duration: "200", style: {color: '#5da874'}})
     
   }
 
   getWord = async () => {
-    // const response = await fetch('https://wordlyclone.herokuapp.com/word');
     const response = await fetch('/word');
     const body = await response.text();
 
@@ -120,17 +125,21 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 
   loadWords = async () => {
     var r = await fetch(words)
-    r = await (await r.text()).split("\n");
+    r = await (await r.text()).split(/\r?\n/);
     this.words = r
   };
 
   getRandomWord()
-{
-    var r = Math.floor(Math.random() * this.words.length);
-    var word = this.words[r]
-    console.log(word)
-    return word
-}
+  {
+      var r = Math.floor(Math.random() * this.words.length);
+      var word = this.words[r]
+      return word
+  }
+
+  isValidWord(word)
+  {
+      return this.words.includes(word)
+  }
 
   componentDidMount(){
     document.addEventListener("keydown", this.handleOnKeyPress, false);
