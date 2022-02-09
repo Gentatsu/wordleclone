@@ -32,7 +32,7 @@ export default class Cell extends React.Component {
       <div className={classNames({
         [this.props.keyStyle]: true,
         [this.state.keyState]: true
-        })}>
+      })}>
         {this.state.letter}
       </div>
     </div>

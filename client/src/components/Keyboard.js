@@ -1,6 +1,7 @@
 import React  from "react"
 import "./Key.css"
-import Cell, {unused, rightplace, wrongplace, wrongletter_keyboard} from "./Cell"
+import { BsFillBackspaceFill } from 'react-icons/bs';
+import Cell, { rightplace, wrongplace, wrongletter_keyboard} from "./Cell"
 
 export class Keyboard extends React.Component {
 
@@ -31,9 +32,14 @@ export class Keyboard extends React.Component {
 
   render() {
       return <div className="keyboard">
-        {this.state.rows}
-        <Cell cellStyle="key centered bigkey" onClick={this.props.enter} keyStyle="keyletter" letter={"Enter"}/>
-        <Cell cellStyle="key centered bigkey" onClick={this.props.delete} keyStyle="keyletter" letter={"<-"}/>
+        {/* {this.state.rows} */}
+        <div className="row">{this.state.rows.slice(0,10)}</div>
+        <div className="row">{this.state.rows.slice(10,19)}</div>
+        <div  className="row">
+          <Cell cellStyle="key centered bigkey" onClick={this.props.enter} keyStyle="keyletter" letter={"enter"}/>
+          {this.state.rows.slice(19,26)}
+          <Cell cellStyle="key centered bigkey" onClick={this.props.delete} keyStyle="keyletter" letter={<BsFillBackspaceFill/>}/>
         </div>
+      </div>
   }
 }

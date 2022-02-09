@@ -4,6 +4,7 @@
     margin: 0.2em 0.2em 0 0;
     background-color: #C5C6BE;
     float: left;
+    border-radius: 0.2em;
 }
 
 .keyletter {
@@ -12,15 +13,17 @@
     font-size: 1em;
     font-weight: bold;
     text-align: center;
+    align-items: center;
     color: #FFFFFF;
     transition: all .3s;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-radius: 0.2em;
 }
 
 .keyboard {
-    width: 39%;
+    width: 55%;
     display: flex;
     margin-bottom: 0.1em;
     margin-top: 0.5em;
@@ -39,5 +42,12 @@
 }
 
 .bigkey {
-    width: 45% !important;
+    width: 15% !important;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

@@ -5,8 +5,12 @@ import {Word} from "./components/Word"
 import {Keyboard} from "./components/Keyboard"
 import toast, { Toaster } from 'react-hot-toast';
 import ReactGA from 'react-ga';
+import words from "./words/words_5_2.txt";
+
 ReactGA.initialize('UA-48542571-2');
 ReactGA.pageview(window.location.pathname + window.location.search);
+
+
 
  //the class you are making your component from
  class App extends Component {
@@ -15,6 +19,7 @@ ReactGA.pageview(window.location.pathname + window.location.search);
   wordLength = 5
   alphabet = "qwertyuiopasdfghjklzxcvbnm" 
   done = false
+  words = []
   
   constructor(props) {
     super(props);
@@ -113,10 +118,24 @@ ReactGA.pageview(window.location.pathname + window.location.search);
     return body.trim();
   };
 
+  loadWords = async () => {
+    var r = await fetch(words)
+    r = await (await r.text()).split("\n");
+    this.words = r
+  };
+
+  getRandomWord()
+{
+    var r = Math.floor(Math.random() * this.words.length);
+    var word = this.words[r]
+    console.log(word)
+    return word
+}
+
   componentDidMount(){
     document.addEventListener("keydown", this.handleOnKeyPress, false);
-    this.getWord()
-      .then(res => this.setState({ correctWord: res }))
+    this.loadWords()
+      .then(res => this.setState({ correctWord: this.getRandomWord() }))
       .catch(err => console.log(err));
   }
 

@@ -4,6 +4,7 @@
     margin: 0.3em 0.3em 0 0;
     background-color: #C5C6BE;
     float: left;
+    border-radius: 0.3em;
 }
 
 .letter {
@@ -14,6 +15,7 @@
     text-align: center;
     color: #FFFFFF;
     transition: all .3s;
+    border-radius: 0.1em;
 }
 
 .wrongplace {
