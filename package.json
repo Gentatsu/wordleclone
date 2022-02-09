@@ -10,5 +10,8 @@
   "scripts": {
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }

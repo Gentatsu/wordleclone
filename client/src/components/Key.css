@@ -23,12 +23,7 @@
 }
 
 .keyboard {
-    width: 55%;
-    display: flex;
-    margin-bottom: 0.1em;
-    margin-top: 0.5em;
-    flex-wrap: wrap;
-    justify-content: center;
+
 }
 
 @media only screen and (max-width: 768px) {

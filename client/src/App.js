@@ -158,8 +158,8 @@ ReactGA.pageview(window.location.pathname + window.location.search);
     const page = 
      (
         <div className ="centered">
-        <div><Toaster/></div>
-        {this.state.words}
+        <Toaster/>
+        <div className="centered">{this.state.words}</div>
         {this.state.keyboard}
         </div>
     );
