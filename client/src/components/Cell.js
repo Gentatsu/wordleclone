@@ -5,7 +5,7 @@ import classNames from "classnames";
 export const unused = "unused"
 export const rightplace = "rightplace"
 export const wrongplace = "wrongplace"
-export const wrongletter_keyboard = "wrongletter_keyboard"
+export const wrongletter= "wrongletter"
 
 export default class Cell extends React.Component {
   
@@ -17,7 +17,7 @@ export default class Cell extends React.Component {
   updateState(newState)
   {
     this.setState(function(state, props) {
-      return (state.keyState === rightplace || state.keyState === wrongletter_keyboard) ? {} : {keyState: newState};
+      return (state.keyState === rightplace || state.keyState === wrongletter) ? {} : {keyState: newState};
     });
   } 
 

@@ -1,7 +1,7 @@
 import React from "react"
 import "./Word.css"
 import "./Cell.css"
-import Cell, {rightplace, wrongplace} from "./Cell"
+import Cell, {rightplace, wrongletter, wrongplace} from "./Cell"
 
 function* enumerate (it, start = 0)
 { let i = start
@@ -43,12 +43,16 @@ export class Word extends React.Component {
     {
       for (const [index, letter] of enumerate(correctWord))
       {
-        let attemptIndex = attempt.indexOf(letter)
+        const attemptIndex = attempt.indexOf(letter)
         if (attemptIndex === -1)
           continue
-        let correct = letter === attempt[index]
+        const correct = letter === attempt[index]
         this.state.rows[correct ? index: attemptIndex].ref.current.updateState(correct ? rightplace: wrongplace)
       }
+      attempt.forEach((letter, i) => {
+        if (correctWord.indexOf(letter) === -1)
+          this.state.rows[i].ref.current.updateState(wrongletter)
+      });
     }
 
     render() {

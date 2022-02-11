@@ -1,7 +1,7 @@
 import React  from "react"
 import "./Key.css"
 import { BsFillBackspaceFill } from 'react-icons/bs';
-import Cell, { rightplace, wrongplace, wrongletter_keyboard} from "./Cell"
+import Cell, { rightplace, wrongplace, wrongletter} from "./Cell"
 
 export class Keyboard extends React.Component {
 
@@ -19,14 +19,14 @@ export class Keyboard extends React.Component {
 
   checkAttempt(attempt, correctWord)
   {
-    var corrects = attempt.map(letter => (correctWord.indexOf(letter)), this);
+    const corrects = attempt.map(letter => (correctWord.indexOf(letter)), this);
     for (let i = 0; i < attempt.length; i++) 
     { 
       var keyfunc = this.state.rows.find(key => key.props.letter === attempt[i]).ref.current;
       if (corrects[i] !== -1)
         keyfunc.updateState(attempt[i] === correctWord[i] ? rightplace: wrongplace)
       else
-        keyfunc.updateState(wrongletter_keyboard)
+        keyfunc.updateState(wrongletter)
     }
   }
 
