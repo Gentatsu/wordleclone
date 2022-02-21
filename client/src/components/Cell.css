@@ -10,9 +10,13 @@
 .letter {
     height: 100%;
     width: 100%;
-    font-size: 3em;
+    font-size: 1.5em;
     font-weight: bold;
     text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
     color: #FFFFFF;
     transition: all .3s;
     border-radius: 0.1em;

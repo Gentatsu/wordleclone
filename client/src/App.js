@@ -17,7 +17,7 @@ ReactGA.pageview(window.location.pathname + window.location.search);
   // constructor to set state and bind "this"
   allowedAttempts = 5
   wordLength = 6
-  alphabet = "qwertyuiopasdfghjklzxcvbnm" 
+  alphabet = "qwertyuiopasdfghjklzxcvbnm".toUpperCase()
   done = false
   words = []
   
@@ -48,7 +48,8 @@ ReactGA.pageview(window.location.pathname + window.location.search);
      // letter a-z, A-z
       if ((event.keyCode >= 65 && event.keyCode <= 90))
       {
-        var letter = event.key.toLowerCase()
+        var letter = event.key.toUpperCase()
+        // var letter = event.key.toLowerCase()
         this.addLetter(letter)
         
       }
@@ -138,13 +139,13 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 
   isValidWord(word)
   {
-      return this.words.includes(word)
+      return this.words.includes(word.toLowerCase())
   }
 
   componentDidMount(){
     document.addEventListener("keydown", this.handleOnKeyPress, false);
     this.loadWords()
-      .then(res => this.setState({ correctWord: "oxford" }))
+      .then(res => this.setState({ correctWord: "OXFORD" }))
       // .then(res => this.setState({ correctWord: this.getRandomWord() }))
       .catch(err => console.log(err));
   }
