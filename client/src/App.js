@@ -5,7 +5,7 @@ import {Word} from "./components/Word"
 import {Keyboard} from "./components/Keyboard"
 import toast, { Toaster } from 'react-hot-toast';
 import ReactGA from 'react-ga';
-import words from "./words/words_5_2.txt";
+import words from "./words/words_6.txt";
 
 ReactGA.initialize('UA-48542571-2');
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -15,8 +15,8 @@ ReactGA.pageview(window.location.pathname + window.location.search);
  //the class you are making your component from
  class App extends Component {
   // constructor to set state and bind "this"
-  allowedAttempts = 6
-  wordLength = 5
+  allowedAttempts = 5
+  wordLength = 6
   alphabet = "qwertyuiopasdfghjklzxcvbnm" 
   done = false
   words = []
@@ -144,7 +144,8 @@ ReactGA.pageview(window.location.pathname + window.location.search);
   componentDidMount(){
     document.addEventListener("keydown", this.handleOnKeyPress, false);
     this.loadWords()
-      .then(res => this.setState({ correctWord: this.getRandomWord() }))
+      .then(res => this.setState({ correctWord: "oxford" }))
+      // .then(res => this.setState({ correctWord: this.getRandomWord() }))
       .catch(err => console.log(err));
   }
 
@@ -158,9 +159,10 @@ ReactGA.pageview(window.location.pathname + window.location.search);
     const page = 
      (
         <div className ="centered">
-        <Toaster/>
-        <div className="centered">{this.state.words}</div>
-        {this.state.keyboard}
+          <img src={require('./lakalogo2.png')} />
+          <Toaster/>
+          <div className="centered">{this.state.words}</div>
+          {this.state.keyboard}
         </div>
     );
     return page

@@ -2,7 +2,7 @@
     width: 2em;
     height: 3.5em;
     margin: 0.2em 0.2em 0 0;
-    background-color: #C5C6BE;
+    background-color: #D9E1DF;
     float: left;
     border-radius: 0.2em;
 }
@@ -23,7 +23,7 @@
 }
 
 .keyboard {
-
+    margin-top: 10vmin;
 }
 
 @media only screen and (max-width: 768px) {
@@ -33,7 +33,7 @@
   }
 
 .wrongletter {
-    background-color: #666666;
+    background-color: #00282E;
 }
 
 .bigkey {

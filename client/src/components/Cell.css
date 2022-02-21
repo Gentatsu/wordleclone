@@ -2,7 +2,7 @@
     width: 4em;
     height: 4em;
     margin: 0.3em 0.3em 0 0;
-    background-color: #C5C6BE;
+    background-color: #D9E1DF;
     float: left;
     border-radius: 0.3em;
 }
@@ -19,9 +19,9 @@
 }
 
 .wrongplace {
-    background-color: #c2c45f;
+    background-color: #166C75;
 }
 .rightplace {
-    background-color: #5da874;
+    background-color: #FD7D73;
 }
 
