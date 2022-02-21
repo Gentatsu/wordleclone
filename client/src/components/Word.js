@@ -41,6 +41,10 @@ export class Word extends React.Component {
 
     enter(attempt, correctWord)
     {
+      // let correctLetters = correctWord.split("")
+      attempt.forEach((letter, i) => {
+          this.state.rows[i].ref.current.updateState(wrongletter)
+      });
       for (const [index, letter] of enumerate(correctWord))
       {
         const attemptIndex = attempt.indexOf(letter)
@@ -49,10 +53,6 @@ export class Word extends React.Component {
         const correct = letter === attempt[index]
         this.state.rows[correct ? index: attemptIndex].ref.current.updateState(correct ? rightplace: wrongplace)
       }
-      attempt.forEach((letter, i) => {
-        if (correctWord.indexOf(letter) === -1)
-          this.state.rows[i].ref.current.updateState(wrongletter)
-      });
     }
 
     render() {

@@ -85,14 +85,14 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 
   checkEnter()
   {
+    if (this.state.word.length !== this.wordLength || this.done)
+      return
     var word = this.state.word.join('')
     if (!this.isValidWord(word))
     {
       toast.error("Invalid wordo", {duration: "100"})
       return
     }
-    if (this.state.word.length !== this.wordLength || this.done)
-      return
     if (word === this.state.correctWord || this.state.currentAttempt+1 === this.allowedAttempts)
     {
       this.removeKeyPressHandler()

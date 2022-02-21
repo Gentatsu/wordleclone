@@ -17,7 +17,9 @@ export default class Cell extends React.Component {
   updateState(newState)
   {
     this.setState(function(state, props) {
-      return (state.keyState === rightplace || state.keyState === wrongletter) ? {} : {keyState: newState};
+      if (state.keyState === rightplace || (state.keyState === wrongletter && (![wrongplace, rightplace].includes(newState))))
+        return {}
+      return {keyState: newState};
     });
   } 
 
