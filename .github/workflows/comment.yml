@@ -21,7 +21,7 @@ jobs:
         uses: tzkhan/pr-update-action@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          base-branch-regex: '[a-zA-Z]+'
+          base-branch-regex: '[a-z\d-_.\\/]+'
           body-template: |
             References ['${{ steps.command.outputs.command-arguments }}'"]
           body-update-action: 'suffix'
