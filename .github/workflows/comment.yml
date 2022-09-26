@@ -25,7 +25,4 @@ jobs:
           body-template: |
               References [${{ steps.command.outputs.command-arguments }}]
           body-update-action: 'suffix'
-          title-uppercase-base-match: false
-          title-uppercase-head-match: false
-          body-uppercase-head-match: false
           body-uppercase-base-match: false
