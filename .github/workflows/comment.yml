@@ -25,8 +25,9 @@ jobs:
         with:
           script: |
             github.rest.pulls.update({
-              pull_number: ${{ steps.PR.outputs.number }} ,
+              pull_number: ${{ steps.PR.outputs.number }},
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '${{ steps.PR.outputs.pr_body }} References [${{ steps.command.outputs.command-arguments }}]'
+              body: '👋 Thanks for reporting!'
             })
+
