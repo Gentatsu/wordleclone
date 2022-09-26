@@ -18,8 +18,15 @@ jobs:
           reaction-type: '+1'
           permission-level: write
       - name: Update PR
-        uses: Perdoo/pull-request-update-body-action@v1.0.1
+      - uses: tzkhan/pr-update-action@v2
         with:
-          ghToken: ${{ secrets.GITHUB_TOKEN }}
-          body: |
-              References ['${{ steps.command.outputs.command-arguments }}'"]
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          base-branch-regex: '[a-z\d-_.\\/]+'
+          title-template: '[%headbranch%] '
+          body-template: |
+              References [${{ steps.command.outputs.command-arguments }}]
+          body-update-action: 'suffix'
+          title-uppercase-base-match: false
+          title-uppercase-head-match: false
+          body-uppercase-head-match: false
+          body-uppercase-base-match: false
