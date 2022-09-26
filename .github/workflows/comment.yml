@@ -22,6 +22,7 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           base-branch-regex: '[a-z\d-_.\\/]+'
+          head-branch-regex: '[a-z\d-_.\\/]+'
           body-template: |
             References ['${{ steps.command.outputs.command-arguments }}'"]
           body-update-action: 'suffix'
