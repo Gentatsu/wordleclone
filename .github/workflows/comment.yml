@@ -28,4 +28,7 @@ jobs:
           script: |
             console.log(context.issue.number)
             console.log(context.issue.pull_request)
+            console.log(${{ steps.PR.outputs.pr_body }})
+            console.log(github.event.pull_request)
+
 
