@@ -32,7 +32,7 @@ jobs:
               pull_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: context.issue.body + '\n References ['${{ steps.command.outputs.command-arguments }}]',
+              body: context.issue.body + '\n References [${{ steps.command.outputs.command-arguments }}]',
             })
 
 
