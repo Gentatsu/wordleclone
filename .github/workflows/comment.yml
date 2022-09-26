@@ -28,10 +28,4 @@ jobs:
           script: |
             console.log(${{ steps.PR.outputs.number }})
             console.log(context)
-            # github.rest.pulls.update({
-            #   pull_number: ${{ steps.PR.outputs.number }},
-            #   owner: context.repo.owner,
-            #   repo: context.repo.repo,
-            #   body: 'References ['${{ steps.command.outputs.command-arguments }}]',
-            # })
 
