@@ -26,6 +26,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            console.log(${{ steps.PR.outputs.number }})
-            console.log(context)
+            console.log(context.issue.number)
+            console.log(context.issue.pull_request)
 
