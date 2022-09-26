@@ -17,19 +17,10 @@ jobs:
           reaction: 'true'
           reaction-type: '+1'
           permission-level: write
-      - name: Get PR number of merged PR
-        uses: 8BitJonny/gh-get-current-pr@2.1.1
-        id: PR
-        with:
-          sha: ${{ github.event.pull_request.head.sha }}
       - name: Update PR
         uses: actions/github-script@v6
         with:
           script: |
-            console.log(context)
-            console.log(context.issue.number)
-            console.log(context.payload?.issue?.body)
-            console.log(context.issue)
             github.rest.pulls.update({
               pull_number: context.issue.number,
               owner: context.repo.owner,
