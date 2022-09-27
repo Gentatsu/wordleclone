@@ -47,7 +47,7 @@ jobs:
       - name: Get ticket 
         id: ticket
         run: |
-           echo ::set-output name=ticket::$(echo ${{ needs.current.outputs.pr }} | grep -e '[A-Z]\+-[0-9]\+' -o)" 
+           echo ::set-output name=ticket::$(echo ${{ needs.current.outputs.pr }} | grep -e '[A-Z]\+-[0-9]\+' -o)
       - uses: EndBug/add-and-commit@v9
         with:
           message: 'Test'
