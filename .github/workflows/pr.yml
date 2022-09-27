@@ -31,3 +31,4 @@ jobs:
               title: 'Staging - Test',
               body: 'test'
             })
+          github-token: ${{ secrets.ACTION_PAT }}
