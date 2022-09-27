@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          name: Gentatsu/lakawordle
+          repository: Gentatsu/lakawordle
       - run: echo "123" > file.txt
       - uses: EndBug/add-and-commit@v9
         with:
