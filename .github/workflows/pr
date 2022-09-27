@@ -1,0 +1,21 @@
+ on:
+  workflow_dispatch: {}
+name: pr
+
+jobs: 
+ pratchett_pr:
+    runs-on: "ubuntu-20.04"
+    steps:
+      - name: Create Staging PR in Pratchett 
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.pulls.create({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: 'lakawordle',
+              head: context.actor + ":test"
+              base: master
+              title: Staging - Test
+              body: 'test',
+            })
