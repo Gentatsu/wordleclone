@@ -7,6 +7,14 @@ jobs:
   pratchett_pr:
     runs-on: "ubuntu-20.04"
     steps:
+      - uses: actions/checkout@v3
+        with:
+          name: Gentatsu/lakawordle
+      - run: echo "123" > file.txt
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Test'
+          add: '*.txt'
       - name: Create Staging PR in Pratchett 
         uses: actions/github-script@v6
         with:
@@ -14,7 +22,7 @@ jobs:
             github.rest.pulls.create({
               pull_number: context.issue.number,
               owner: context.repo.owner,
-              repo: 'lakawordle',
+              repo: context.repo.repo
               head: context.actor + ':test',
               base: 'master',
               title: 'Staging - Test',
