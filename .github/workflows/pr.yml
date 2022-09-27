@@ -15,13 +15,9 @@ jobs:
       - run: |
           echo ${{ steps.PR.outputs.number }}
           echo ${{ steps.PR.outputs.pr_title }}
-      - run: echo "PR ${prNumber} ${prTitle} at ${prUrl} is ${prJSON}"
+      - run: echo "PR ${prNumber} ${prTitle} at ${prUrl} "
         if: steps.PR.outcome == 'success'
         env:
-          # JSON object with the full PR object
-          # toJSON(fromJSON(...pr)) parses it into memory and then format is with pretty-print.
-          prJSON: ${{ toJSON(fromJSON(steps.current_pr.outputs.pr)) }}
-          # Direct access to common PR properties
           prNumber: ${{ steps.PR.outputs.number }}
           prUrl: ${{ steps.PR.outputs.pr_url }}
           prTitle: ${{ steps.PR.outputs.pr_title }}
