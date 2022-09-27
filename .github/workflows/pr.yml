@@ -12,6 +12,8 @@ jobs:
       - name: PR
         uses: 8BitJonny/gh-get-current-pr@2.1.1
         id: PR
+        with:
+          github-token: ${{ secrets.ACTION_PAT }}
       - run: |
           echo ${{ steps.PR.outputs.number }}
           echo ${{ steps.PR.outputs.pr_title }}
