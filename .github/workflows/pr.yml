@@ -11,7 +11,7 @@ jobs:
         with:
           repository: Gentatsu/lakawordle
           path: master
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACTION_PAT }}
       - run: echo "123" > file.txt
       - uses: EndBug/add-and-commit@v9
         with:
