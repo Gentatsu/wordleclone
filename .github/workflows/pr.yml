@@ -28,8 +28,6 @@ jobs:
         id: ticket
         run: |
            echo ::set-output name=ticket::$(${{ needs.outputs.current.pr }} | grep -e '[A-Z]\+-[0-9]\+' -o)" 
-      - name: Comment on PR with build info
-        if: steps.PR.outputs.number != ''
       - uses: EndBug/add-and-commit@v9
         with:
           message: 'Test'
