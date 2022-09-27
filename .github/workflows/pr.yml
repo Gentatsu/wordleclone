@@ -12,8 +12,9 @@ jobs:
       - name: PR
         uses: 8BitJonny/gh-get-current-pr@2.1.1
         id: PR
+      - run: echo ${{ steps.PR.outputs.pr_title }}
     outputs:
-      pr: ${{ steps.PR.outputs.pr_url }}
+      pr: ${{ steps.PR.outputs.pr_title }}
   pratchett_pr:
     runs-on: "ubuntu-20.04"
     needs: current
@@ -24,6 +25,7 @@ jobs:
           ref: master
           token: ${{ secrets.ACTION_PAT }}
       - run: echo "123" > file.txt
+      - run: echo ${{ needs.current.outputs.pr }} 
       - name: Get ticket 
         id: ticket
         run: |
