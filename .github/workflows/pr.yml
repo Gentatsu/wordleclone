@@ -17,6 +17,6 @@ jobs:
               repo: 'lakawordle',
               head: context.actor + ':test',
               base: 'master',
-              title: 'Staging - Test'
-              body: 'test',
+              title: 'Staging - Test',
+              body: 'test'
             })
