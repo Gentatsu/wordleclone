@@ -1,11 +1,22 @@
 on:
   workflow_dispatch: {}
- 
+  pull_request:
+    types: [opened, synchronize, reopened]
+    
 name: pr
 
 jobs: 
+  current:
+    runs-on: "ubuntu-20.04"
+    steps:
+      - name: PR
+        uses: 8BitJonny/gh-get-current-pr@2.1.1
+        id: PR
+    outputs:
+      pr: ${{ steps.PR.outputs.pr_url }}
   pratchett_pr:
     runs-on: "ubuntu-20.04"
+    needs: current
     steps:
       - uses: actions/checkout@v3
         with:
@@ -13,11 +24,17 @@ jobs:
           ref: master
           token: ${{ secrets.ACTION_PAT }}
       - run: echo "123" > file.txt
+      - name: Get ticket 
+        id: ticket
+        run: |
+           echo ::set-output name=ticket::$(${{ needs.outputs.current.pr }} | grep -e '[A-Z]\+-[0-9]\+' -o)" 
+      - name: Comment on PR with build info
+        if: steps.PR.outputs.number != ''
       - uses: EndBug/add-and-commit@v9
         with:
           message: 'Test'
           add: '*.txt'
-          new_branch: 'test'
+          new_branch: ${{ steps.ticket.outputs.ticket }}
       - name: Create Staging PR in Pratchett 
         uses: actions/github-script@v6
         with:
@@ -26,9 +43,9 @@ jobs:
               pull_number: context.issue.number,
               owner: context.repo.owner,
               repo: 'lakawordle',
-              head: 'test',
+              head: '${{ steps.ticket.outputs.ticket }}',
               base: 'master',
-              title: 'Staging - Test',
-              body: 'test'
+              title: 'Staging - ${{ steps.ticket.outputs.ticket }}',
+              body: ' Ticket ${{ steps.ticket.outputs.ticket }}'
             })
           github-token: ${{ secrets.ACTION_PAT }}
